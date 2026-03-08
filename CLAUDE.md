@@ -1,4 +1,4 @@
-# gen-health — CLAUDE.md
+# Meze — CLAUDE.md
 
 ## Stack
 - **Expo + React Native** (expo-router, file-based routing)
@@ -26,7 +26,7 @@
 
 ## API Schemas
 
-**Generate plan** response per option:
+**Suggestions** response per option:
 ```json
 { "id", "name", "description", "key_ingredients": ["2-3 fresh items"] }
 ```
@@ -49,15 +49,25 @@ Last 10 liked/disliked injected into system prompt on next generate.
 
 ## Files
 ```
-app/_layout.jsx     root layout (expo-router)
-app/index.jsx       full app — MealPlanner, MealSlot, RecipeView, ShoppingList, SundaySlots
-server.mjs          Express proxy → Anthropic API (port 3001)
-.env                ANTHROPIC_API_KEY
+app/_layout.jsx              root layout (expo-router)
+app/index.jsx                MealPlanner screen — imports from src/
+src/constants.js             SLOTS, DAYS, emptySlots
+src/storage.js               loadPrefs, savePrefs (AsyncStorage)
+src/api.js                   fetchOptions, fetchRecipe, fetchShoppingList
+src/styles.js                colors + StyleSheet
+src/components/MealSlot.jsx
+src/components/RecipeView.jsx
+src/components/ShoppingList.jsx
+src/components/SundaySlots.jsx
+server.mjs                   Express proxy → Anthropic API (port 3001)
+electron/main.js             Electron entry — handles dev + packaged modes
+electron/launch.js           Dev launcher (waits 5s, spawns Electron)
+.env                         ANTHROPIC_API_KEY
 ```
 
 ## Dev
 ```bash
-pnpm dev      # proxy + expo together (concurrently)
-pnpm server   # proxy only
-pnpm start    # expo only (w=web, i=iOS, a=Android)
+pnpm dev        # proxy + expo (browser)
+pnpm app        # proxy + expo + electron window
+pnpm build:app  # expo export + electron-builder → release/mac-arm64/Meze.app
 ```

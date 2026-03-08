@@ -1,5 +1,5 @@
 {
-  "name": "gen-health",
+  "name": "meze",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -35,8 +35,8 @@
     "node-fetch": "^3.3.2"
   },
   "build": {
-    "appId": "com.genhealth.app",
-    "productName": "gen-health",
+    "appId": "com.meze.app",
+    "productName": "Meze",
     "extraMetadata": {
       "main": "electron/main.js"
     },
@@ -49,7 +49,7 @@
     ],
     "mac": {
       "category": "public.app-category.healthcare-fitness",
-      "icon": "assets/icon.png"
+      "icon": "assets/fish.icns"
     },
     "directories": {
       "output": "release"

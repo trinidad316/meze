@@ -90,7 +90,7 @@ function createWindow() {
     height: HEIGHT,
     resizable: false,
     titleBarStyle: "hiddenInset",
-    title: "gen-health",
+    title: "Meze",
     backgroundColor: "#f7f3ee",
     webPreferences: { nodeIntegration: false, contextIsolation: true },
   });

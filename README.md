@@ -1,8 +1,8 @@
-# gen-health
+# Meze
 
-Personalized Mediterranean meal planner. AI-powered suggestions tailored to a specific health profile (Sjögren's syndrome, anti-inflammatory diet, GI recovery). Learns preferences over time.
+AI-powered Mediterranean meal planner tailored for Sjögren's syndrome — moist, anti-inflammatory, high protein, GI-gentle. Suggests meals per slot, fetches full recipes on demand, and builds a consolidated shopping list. Runs as a native desktop app or in the browser.
 
-Built with Expo (iOS, Android, web) + Anthropic API.
+Built with Expo (React Native) + Anthropic API + Electron.
 
 ## Setup
 
@@ -26,6 +26,23 @@ Or double-click `launch.command` on macOS to open as a desktop app (Electron, iP
 3. **More** — don't like the options? fetch 3 fresh ones for that slot
 4. **Recipe** — tap "▼ Get recipe" on a selected meal for full instructions + chef tips
 5. **Shopping list** — tap "▼ Build Shopping List" to generate a grouped list (Produce / Protein / Dairy / Pantry) from all your selections
+
+## Release (macOS desktop app)
+
+Builds a standalone `.app` — no terminal, no dev server. Double-click from Applications.
+
+```bash
+pnpm build:app
+```
+
+This runs `expo export --platform web` then `electron-builder --mac`. Output lands in `release/mac-arm64/Meze.app`.
+
+**Install:**
+```bash
+cp -r release/mac-arm64/Meze.app /Applications/
+```
+
+The app bundles its own proxy server and serves the pre-built web files internally. Your `.env` (with `ANTHROPIC_API_KEY`) is bundled at build time — update the key and rebuild if you rotate it.
 
 ## Cost
 

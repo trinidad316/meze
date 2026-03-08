@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "gen-health",
-    "slug": "gen-health",
+    "name": "Meze",
+    "slug": "meze",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "scheme": "gen-health",
+    "scheme": "meze",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#111111"
+      "backgroundColor": "#f7f3ee"
     },
     "ios": {
       "supportsTablet": true
