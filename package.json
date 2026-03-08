@@ -1,18 +1,58 @@
 {
   "name": "gen-health",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "server": "node server.mjs",
+    "dev": "concurrently \"node server.mjs\" \"expo start\"",
+    "app": "concurrently \"node server.mjs\" \"expo start\" \"node electron/launch.js\"",
+    "build:app": "expo export --platform web && electron-builder --mac"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~55.0.5",
+    "expo-router": "~55.0.4",
     "expo-status-bar": "~55.0.4",
     "react": "19.2.0",
-    "react-native": "0.83.2"
+    "react-dom": "19.2.0",
+    "react-native": "0.83.2",
+    "react-native-safe-area-context": "~5.6.2",
+    "react-native-screens": "~4.23.0",
+    "react-native-web": "^0.21.2"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "electron": "^40.8.0",
+    "electron-builder": "^26.8.1",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2"
+  },
+  "build": {
+    "appId": "com.genhealth.app",
+    "productName": "gen-health",
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "files": [
+      "electron/main.js"
+    ],
+    "extraResources": [
+      { "from": "dist", "to": "dist" },
+      { "from": ".env", "to": ".env" }
+    ],
+    "mac": {
+      "category": "public.app-category.healthcare-fitness",
+      "icon": "assets/icon.png"
+    },
+    "directories": {
+      "output": "release"
+    }
+  }
 }
