@@ -1,6 +1,8 @@
 {
   "name": "meze",
   "version": "1.0.0",
+  "description": "AI-powered Mediterranean meal planner for Sjögren's syndrome",
+  "author": "trinidad316",
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
