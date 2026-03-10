@@ -1,6 +1,6 @@
 # Meze
 
-AI-powered Mediterranean meal planner tailored for Sjögren's syndrome — moist, anti-inflammatory, high protein, GI-gentle. Suggests meals per slot, fetches full recipes on demand, and builds a consolidated shopping list. Runs as a native desktop app or in the browser.
+Personal meal planner built on the Mediterranean diet — suggests options per slot, learns your taste through ratings, fetches full recipes on demand, and generates a consolidated shopping list. Runs as a native macOS desktop app.
 
 Built with Expo (React Native) + Anthropic API + Electron.
 
