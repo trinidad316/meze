@@ -100,13 +100,16 @@ app.get("/api/meals/ratings", (req, res) => {
   res.json(map);
 });
 
-// History + liked/disliked for seeding the app on load
+// History + liked/disliked + ratings map for seeding the app on load
 app.get("/api/meals/history", (req, res) => {
+  const ratingsMap = {};
+  getAllRatings.all().forEach(r => { ratingsMap[r.name] = r.rating; });
   res.json({
     history:   getHistory.all(),
     favorites: getFavorites.all().map(r => r.name),
     liked:     getLiked.all().map(r => r.name),
     disliked:  getDisliked.all().map(r => r.name),
+    ratings:   ratingsMap,
   });
 });
 

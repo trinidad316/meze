@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { fetchShoppingList } from "../api";
 import { styles } from "../styles";
@@ -16,7 +16,7 @@ export function ShoppingList({ selections }) {
   const [loading, setLoading] = useState(false);
   const [expanded,setExpanded]= useState(false);
 
-  const currentKey = JSON.stringify(selections);
+  const currentKey = useMemo(() => JSON.stringify(selections), [selections]);
   const stale = list && listKey !== currentKey;
   const count = Object.values(selections).filter(Boolean).length;
   if (count === 0) return null;

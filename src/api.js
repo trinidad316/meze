@@ -1,22 +1,27 @@
-import { API_URL } from "./constants";
+import { API_URL, DB_URL, CLAUDE_MODEL } from "./constants";
 
-const DB_URL = "http://localhost:3001";
+async function callClaude(maxTokens, system, content) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: CLAUDE_MODEL,
+      max_tokens: maxTokens,
+      system,
+      messages: [{ role: "user", content }],
+    }),
+  });
+  const data = await res.json();
+  const text  = (data.content || []).map(b => b.text || "").join("");
+  return JSON.parse(text.replace(/```json|```/g, "").trim());
+}
 
 export async function fetchMealHistory() {
   try {
     const res = await fetch(`${DB_URL}/api/meals/history`);
-    return await res.json(); // { history, favorites, liked, disliked }
+    return await res.json(); // { history, favorites, liked, disliked, ratings }
   } catch {
-    return { history: [], favorites: [], liked: [], disliked: [] };
-  }
-}
-
-export async function fetchAllRatings() {
-  try {
-    const res = await fetch(`${DB_URL}/api/meals/ratings`);
-    return await res.json(); // { [name]: stars }
-  } catch {
-    return {};
+    return { history: [], favorites: [], liked: [], disliked: [], ratings: {} };
   }
 }
 
@@ -53,67 +58,30 @@ Return ONLY valid JSON, no markdown.`;
 
 export async function fetchOptions(prefs, slotLabel, dayLabel, exclude = []) {
   const excludeNote = exclude.length ? `Exclude: ${exclude.join(", ")}.` : "";
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 500,
-      system: systemPrompt(prefs),
-      messages: [{
-        role: "user",
-        content: `Give 3 ${slotLabel} options for ${dayLabel}. ${excludeNote}
+  return callClaude(500, systemPrompt(prefs),
+    `Give 3 ${slotLabel} options for ${dayLabel}. ${excludeNote}
 Return ONLY a JSON array:
-[{"id":"...","name":"...","description":"1 appetizing sentence","key_ingredients":["2-3 fresh items to buy"]},...]`,
-      }],
-    }),
-  });
-  const data = await res.json();
-  const text  = (data.content || []).map(b => b.text || "").join("");
-  return JSON.parse(text.replace(/```json|```/g, "").trim());
+[{"id":"...","name":"...","description":"1 appetizing sentence","key_ingredients":["2-3 fresh items to buy"]},...]`
+  );
 }
 
 export async function fetchRecipe(mealName, slotLabel) {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 900,
-      system: `Mediterranean meal assistant. Sjögren's: all food moist, tender, easy to swallow. Bold flavors. Return ONLY valid JSON, no markdown.`,
-      messages: [{
-        role: "user",
-        content: `Full recipe for "${mealName}" (${slotLabel}, solo portion).
+  return callClaude(900,
+    `Mediterranean meal assistant. Sjögren's: all food moist, tender, easy to swallow. Bold flavors. Return ONLY valid JSON, no markdown.`,
+    `Full recipe for "${mealName}" (${slotLabel}, solo portion).
 Return ONLY:
-{"prep_time":"...","appliance":"...","ingredients":["..."],"instructions":["..."],"chef_tips":["..."],"sjogrens_note":"..."}`,
-      }],
-    }),
-  });
-  const data = await res.json();
-  const text  = (data.content || []).map(b => b.text || "").join("");
-  return JSON.parse(text.replace(/```json|```/g, "").trim());
+{"prep_time":"...","appliance":"...","ingredients":["..."],"instructions":["..."],"chef_tips":["..."],"sjogrens_note":"..."}`
+  );
 }
 
 export async function fetchShoppingList(selections) {
   const meals = Object.values(selections).filter(Boolean).map(o => o.name).join(", ");
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 600,
-      system: `Mediterranean meal assistant. Sjögren's diet. Return ONLY valid JSON, no markdown.`,
-      messages: [{
-        role: "user",
-        content: `I'm making these meals this week: ${meals}.
+  return callClaude(600,
+    `Mediterranean meal assistant. Sjögren's diet. Return ONLY valid JSON, no markdown.`,
+    `I'm making these meals this week: ${meals}.
 Give me a consolidated shopping list. Exclude pantry staples (olive oil, salt, pepper, dried herbs, vinegar, garlic — assume I have these). Include quantities for solo portions.
 Return ONLY:
 {"produce":["..."],"protein":["..."],"dairy":["..."],"pantry":["..."]}
-Omit empty categories.`,
-      }],
-    }),
-  });
-  const data = await res.json();
-  const text  = (data.content || []).map(b => b.text || "").join("");
-  return JSON.parse(text.replace(/```json|```/g, "").trim());
+Omit empty categories.`
+  );
 }

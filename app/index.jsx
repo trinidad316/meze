@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SLOTS, DAYS, emptySlots } from "../src/constants";
 import { loadPrefs, savePrefs } from "../src/storage";
-import { fetchOptions, fetchMealHistory, fetchAllRatings, logMealSelection, rateMeal } from "../src/api";
+import { fetchOptions, fetchMealHistory, logMealSelection, rateMeal } from "../src/api";
 import { MealSlot } from "../src/components/MealSlot";
 import { ShoppingList } from "../src/components/ShoppingList";
 import { SundaySlots } from "../src/components/SundaySlots";
@@ -20,9 +20,9 @@ export default function MealPlanner() {
   const [ratings, setRatings] = useState({}); // { [mealName]: 1-5 }
 
   useEffect(() => {
-    Promise.all([loadPrefs(), fetchMealHistory(), fetchAllRatings()]).then(([saved, db, stars]) => {
+    Promise.all([loadPrefs(), fetchMealHistory()]).then(([saved, db]) => {
       setPrefs({ ...saved, favorites: db.favorites, liked: db.liked, disliked: db.disliked });
-      setRatings(stars);
+      setRatings(db.ratings || {});
     });
   }, []);
 
@@ -175,10 +175,12 @@ export default function MealPlanner() {
           <SundaySlots
             sundayData={sundayData}
             selections={prefs.selections}
+            ratings={ratings}
             onSelect={handleSundaySelect}
             onUnselect={handleSundayUnselect}
             onLoad={handleSundayLoad}
             onMore={handleSundayMore}
+            onRate={handleRate}
           />
         ) : (
           SLOTS.map(slot => {

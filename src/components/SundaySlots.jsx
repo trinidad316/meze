@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "../styles";
 import { MealSlot } from "./MealSlot";
 
-export function SundaySlots({ sundayData, selections, onSelect, onUnselect, onLoad, onMore }) {
+export function SundaySlots({ sundayData, selections, ratings, onSelect, onUnselect, onLoad, onMore, onRate }) {
   const [mode, setMode] = useState("extended");
   const key     = `sunday_${mode}`;
   const label   = mode === "extended" ? "Extended Sunday Dinner (~3h)" : "Lighter Sunday Dinner";
@@ -29,10 +29,12 @@ export function SundaySlots({ sundayData, selections, onSelect, onUnselect, onLo
         slot="dinner"
         slotData={slotDat}
         selected={selections[key]}
+        ratings={ratings}
         onSelect={(opt) => onSelect(key, opt)}
         onUnselect={() => onUnselect(key)}
         onLoad={() => onLoad(key, label)}
         onMore={() => onMore(key, label, slotDat.options)}
+        onRate={onRate}
       />
     </View>
   );

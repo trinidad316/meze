@@ -1,5 +1,7 @@
-export const PREFS_KEY = "med_diet_prefs";
-export const API_URL   = "http://localhost:3001/api/claude";
+export const PREFS_KEY    = "med_diet_prefs";
+export const DB_URL       = "http://localhost:3001";
+export const API_URL      = `${DB_URL}/api/claude`;
+export const CLAUDE_MODEL = "claude-sonnet-4-20250514";
 
 export const SLOTS = [
   { key: "breakfast",  label: "Breakfast",        color: "#E8935A" },
