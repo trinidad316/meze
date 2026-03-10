@@ -24,8 +24,9 @@ Or double-click `electron/launch.command` on macOS to open as a desktop app (Ele
 1. **Suggest** — tap "+ Get suggestions" on any meal slot to fetch 3 options on demand
 2. **Pick** — select one per slot (breakfast, mid-morning, lunch, afternoon, dinner × 3 days + Sunday)
 3. **More** — don't like the options? fetch 3 fresh ones for that slot
-4. **Recipe** — tap "▼ Get recipe" on a selected meal for full instructions + chef tips
-5. **Shopping list** — tap "▼ Build Shopping List" to generate a grouped list (Produce / Protein / Dairy / Pantry) from all your selections
+4. **Rate** — tap 1–5 stars on any meal; ratings persist and feed back into future suggestions (favorites get suggested more, low-rated meals get avoided)
+5. **Recipe** — tap "▼ Get recipe" on a selected meal for full instructions + chef tips
+6. **Shopping list** — tap "▼ Build Shopping List" to generate a grouped list (Produce / Protein / Dairy / Pantry) from all your selections
 
 ## Release (macOS desktop app)
 
