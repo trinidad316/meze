@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
+    "better-sqlite3": "^12.6.2",
     "expo": "~55.0.5",
     "expo-router": "~55.0.4",
     "expo-status-bar": "~55.0.4",
@@ -46,8 +47,14 @@
       "electron/main.js"
     ],
     "extraResources": [
-      { "from": "dist", "to": "dist" },
-      { "from": ".env", "to": ".env" }
+      {
+        "from": "dist",
+        "to": "dist"
+      },
+      {
+        "from": ".env",
+        "to": ".env"
+      }
     ],
     "mac": {
       "category": "public.app-category.healthcare-fitness",
@@ -56,5 +63,10 @@
     "directories": {
       "output": "release"
     }
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
   }
 }

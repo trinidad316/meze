@@ -11,7 +11,7 @@
 - Anti-inflammatory Mediterranean diet, high protein, GI-gentle
 - Low spice, light dairy, lives alone (ingredient reuse critical)
 - Flavor-forward: herbs, lemon, garlic, olive oil, capers, olives
-- Appliances: cast iron, sheet pan/oven, stovetop, blender — no Instant Pot
+- Appliances: cast iron, sheet pan/oven, stovetop, blender, Cuisinart GR-6S Contact Griddler (smokeless grill, contact grill, panini press, full grill, full griddle, half grill/half griddle) — no Instant Pot
 - Proteins: chicken, salmon, eggs, turkey, legumes
 
 ## App Flow

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import { fetchShoppingList } from "../api";
-import { styles, C } from "../styles";
+import { styles } from "../styles";
 
 const SHOP_CATEGORIES = [
   { key: "produce", label: "PRODUCE", color: "#4a7a4a" },
@@ -46,8 +46,10 @@ export function ShoppingList({ selections }) {
               <Text style={styles.shoppingBtnText}>
                 {expanded && hasItems ? "▲ Shopping List" : "▼ Build Shopping List"}
               </Text>
-              {stale && <Text style={styles.shoppingStale}> · outdated</Text>}
-              <Text style={styles.shoppingCount}>{count} meal{count > 1 ? "s" : ""}</Text>
+              <View style={styles.shoppingMeta}>
+                {stale && <Text style={styles.shoppingStale}>outdated</Text>}
+                <Text style={styles.shoppingCount}>{count} meal{count > 1 ? "s" : ""}</Text>
+              </View>
             </>
         }
       </TouchableOpacity>

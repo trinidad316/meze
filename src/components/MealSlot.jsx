@@ -3,7 +3,19 @@ import { SLOTS } from "../constants";
 import { styles } from "../styles";
 import { RecipeView } from "./RecipeView";
 
-export function MealSlot({ slot, slotData, selected, onSelect, onUnselect, onLoad, onMore }) {
+function StarRating({ name, rating, onRate }) {
+  return (
+    <View style={styles.starRow}>
+      {[1, 2, 3, 4, 5].map(n => (
+        <TouchableOpacity key={n} onPress={() => onRate(name, n)} hitSlop={6}>
+          <Text style={[styles.star, rating >= n && styles.starFilled]}>★</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+}
+
+export function MealSlot({ slot, slotData, selected, ratings, onSelect, onUnselect, onRate, onLoad, onMore }) {
   const meta    = SLOTS.find(s => s.key === slot);
   const options = slotData?.options || [];
   const loading = slotData?.loading || false;
@@ -34,6 +46,7 @@ export function MealSlot({ slot, slotData, selected, onSelect, onUnselect, onLoa
 
       {options.map(opt => {
         const isSelected = selected?.id === opt.id;
+        const starRating = ratings?.[opt.name];
         return (
           <View key={opt.id}>
             <TouchableOpacity
@@ -49,6 +62,7 @@ export function MealSlot({ slot, slotData, selected, onSelect, onUnselect, onLoa
                   {opt.name}
                 </Text>
                 <Text style={styles.optionDesc}>{opt.description}</Text>
+                <StarRating name={opt.name} rating={starRating} onRate={onRate} />
               </View>
             </TouchableOpacity>
             {isSelected && <RecipeView mealName={opt.name} slotLabel={meta.label} />}

@@ -39,6 +39,10 @@ export const styles = StyleSheet.create({
   optionNameSelected:{ color: "#3d7a3d" },
   optionDesc:        { fontSize: 13, color: C.textSecondary, lineHeight: 18 },
 
+  starRow:   { flexDirection: "row", gap: 4, marginTop: 6 },
+  star:      { fontSize: 16, color: C.border },
+  starFilled:{ color: "#C17B5A" },
+
   moreBtn:     { paddingHorizontal: 14, paddingVertical: 12, alignItems: "center", borderTopWidth: 1, borderTopColor: C.border },
   moreBtnText: { fontSize: 13, fontWeight: "600" },
 
@@ -55,13 +59,17 @@ export const styles = StyleSheet.create({
   shoppingCard:    { backgroundColor: "#f0f7f0", borderRadius: 8, borderWidth: 1, borderColor: "#c8dfc8", marginBottom: 14, overflow: "hidden" },
   shoppingBtn:     { flexDirection: "row", alignItems: "center", paddingHorizontal: 14, paddingVertical: 12 },
   shoppingBtnText: { fontSize: 13, fontWeight: "600", color: "#4a7a4a", flex: 1 },
-  shoppingStale:   { fontSize: 12, color: "#a07040" },
+  shoppingMeta:    { flexDirection: "row", alignItems: "center", gap: 8 },
+  shoppingStale:   { fontSize: 11, color: "#a07040", backgroundColor: "#f5e8d0", borderRadius: 4, paddingHorizontal: 5, paddingVertical: 1 },
   shoppingCount:   { fontSize: 11, color: C.textMuted },
   shoppingBody:    { paddingHorizontal: 14, paddingBottom: 14 },
   shoppingError:   { fontSize: 13, color: "#cc3333", padding: 12, textAlign: "center" },
   shopCat:         { marginTop: 10 },
   shopCatLabel:    { fontSize: 9, fontWeight: "700", letterSpacing: 2, marginBottom: 4 },
   shopItem:        { fontSize: 13, color: C.textSecondary, lineHeight: 20 },
+
+  resetBtn:     { marginTop: 8, paddingHorizontal: 12, paddingVertical: 4, borderRadius: 5, borderWidth: 1, borderColor: "#d0b8a0" },
+  resetBtnText: { fontSize: 11, color: C.textMuted, fontWeight: "600" },
 
   toggleRow:        { flexDirection: "row", gap: 8, marginBottom: 12 },
   toggleBtn:        { flex: 1, paddingVertical: 8, borderRadius: 6, borderWidth: 1, borderColor: C.border, alignItems: "center" },
