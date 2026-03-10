@@ -11,7 +11,7 @@ config();
 
 // ── DB setup ──
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const dataDir = join(__dirname, "data");
+const dataDir = join(__dirname, "..", "data");
 if (!existsSync(dataDir)) mkdirSync(dataDir);
 const db = new Database(join(dataDir, "meze.db"));
 db.pragma("journal_mode = WAL");

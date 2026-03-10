@@ -9,9 +9,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "server": "node server.mjs",
-    "dev": "concurrently \"node server.mjs\" \"expo start\"",
-    "app": "concurrently \"node server.mjs\" \"expo start\" \"node electron/launch.js\"",
+    "server": "node server/index.mjs",
+    "dev": "concurrently \"node server/index.mjs\" \"expo start\"",
+    "app": "concurrently \"node server/index.mjs\" \"expo start\" \"node electron/launch.js\"",
     "build:app": "expo export --platform web && electron-builder --mac"
   },
   "dependencies": {

@@ -3,7 +3,7 @@
 ## Stack
 - **Expo + React Native** (expo-router, file-based routing)
 - **Storage:** `AsyncStorage` — key `med_diet_prefs`
-- **API:** Anthropic `/v1/messages`, model `claude-sonnet-4-20250514`, via local Express proxy (`server.mjs` on port 3001)
+- **API:** Anthropic `/v1/messages`, model `claude-sonnet-4-20250514`, via local Express proxy (`server/index.mjs` on port 3001)
 - **Styling:** `StyleSheet.create` inline styles only
 
 ## User Profile (injected into every API call)
@@ -59,9 +59,10 @@ src/components/MealSlot.jsx
 src/components/RecipeView.jsx
 src/components/ShoppingList.jsx
 src/components/SundaySlots.jsx
-server.mjs                   Express proxy → Anthropic API (port 3001)
+server/index.mjs             Express proxy → Anthropic API (port 3001)
 electron/main.js             Electron entry — handles dev + packaged modes
 electron/launch.js           Dev launcher (waits 5s, spawns Electron)
+electron/launch.command      macOS double-click launcher
 .env                         ANTHROPIC_API_KEY
 ```
 

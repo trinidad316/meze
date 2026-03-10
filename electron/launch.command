@@ -1,8 +1,8 @@
 #!/bin/bash
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 # Start proxy in background
-node server.mjs &
+node server/index.mjs &
 PROXY_PID=$!
 
 # Start Expo in background

@@ -17,7 +17,7 @@ pnpm app   # proxy + Expo + Electron desktop window
 
 Press `w` for web, `i` for iOS simulator, `a` for Android.
 
-Or double-click `launch.command` on macOS to open as a desktop app (Electron, iPhone-sized window).
+Or double-click `electron/launch.command` on macOS to open as a desktop app (Electron, iPhone-sized window).
 
 ## How it works
 
@@ -43,6 +43,21 @@ cp -r release/mac-arm64/Meze.app /Applications/
 ```
 
 The app bundles its own proxy server and serves the pre-built web files internally. Your `.env` (with `ANTHROPIC_API_KEY`) is bundled at build time — update the key and rebuild if you rotate it.
+
+## Versioning
+
+Releases are managed with [release-please](https://github.com/googleapis/release-please). On every push to `main`, a GitHub Action opens (or updates) a Release PR with an auto-bumped version and changelog.
+
+**Commit prefix → version bump:**
+
+| Prefix | Bump |
+|---|---|
+| `fix: ...` | patch (1.0.0 → 1.0.1) |
+| `feat: ...` | minor (1.0.0 → 1.1.0) |
+| `feat!:` or `BREAKING CHANGE:` in body | major (1.0.0 → 2.0.0) |
+| `chore:`, `refactor:`, `docs:` | no bump |
+
+Merge the Release PR when you're ready to cut a release — it updates `package.json`, commits `CHANGELOG.md`, and tags the release automatically. Auto-merge is enabled, so the PR will self-merge once CI passes (requires **Settings → General → Allow auto-merge** to be on in GitHub).
 
 ## Cost
 
