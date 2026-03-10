@@ -12,22 +12,7 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      pr_number: ${{ steps.release.outputs.pr }}
     steps:
       - uses: googleapis/release-please-action@v4
-        id: release
         with:
           release-type: node
-
-  automerge:
-    runs-on: ubuntu-latest
-    needs: release-please
-    if: ${{ needs.release-please.outputs.pr_number }}
-    steps:
-      - uses: peter-evans/enable-pull-request-automerge@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ needs.release-please.outputs.pr_number }}
-          merge-method: squash

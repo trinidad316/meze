@@ -57,7 +57,7 @@ Releases are managed with [release-please](https://github.com/googleapis/release
 | `feat!:` or `BREAKING CHANGE:` in body | major (1.0.0 → 2.0.0) |
 | `chore:`, `refactor:`, `docs:` | no bump |
 
-Merge the Release PR when you're ready to cut a release — it updates `package.json`, commits `CHANGELOG.md`, and tags the release automatically. Auto-merge is enabled, so the PR will self-merge once CI passes (requires **Settings → General → Allow auto-merge** to be on in GitHub).
+Merge the Release PR when you're ready to cut a release — it updates `package.json`, commits `CHANGELOG.md`, and tags the release automatically.
 
 ## Cost
 
